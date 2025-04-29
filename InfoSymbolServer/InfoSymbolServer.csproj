@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InfoSymbolServer.Application\InfoSymbolServer.Application.csproj" />
+      <ProjectReference Include="..\InfoSymbolServer.Infrastructure\InfoSymbolServer.Infrastructure.csproj" />
+      <ProjectReference Include="..\InfoSymbolServer.Presentation\InfoSymbolServer.Presentation.csproj" />
+    </ItemGroup>
+
+</Project>

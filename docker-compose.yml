@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  infosymbolserver:
+    image: infosymbolserver
+    build:
+      context: .
+      dockerfile: InfoSymbolServer/Dockerfile
+    ports:
+      - "61578:61578"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=61579;Database=infosymboldb;Username=postgres;Password=postgres
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:alpine
+    container_name: infosymbol-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=infosymboldb
+      - PGPORT=61579
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "61579:61579"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -p 61579"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres-data:

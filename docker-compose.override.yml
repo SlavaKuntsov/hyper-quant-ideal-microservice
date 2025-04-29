@@ -1,0 +1,7 @@
+services:
+  infosymbolserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=61578
+    ports:
+      - "61578"
